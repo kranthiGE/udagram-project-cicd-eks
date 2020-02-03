@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: kranthi1-udagram-dev
+  AWS_PROFILE: eks
+  AWS_REGION: ap-south-1
+  JWT_SECRET: kiransecret
+  POSTGRESS_DB: udagramdev
+  POSTGRESS_HOST: krandb.czaxjtxyxumo.ap-south-1.rds.amazonaws.com
+  URL: http://localhost:8100  
+metadata:
+  name: env-config
+  

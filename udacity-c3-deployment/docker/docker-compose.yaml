@@ -1,0 +1,40 @@
+version: "3"
+services:
+  reverseproxy:
+      image: kran/reverseproxy
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - backend-user
+        - backend-feed     
+  backend-user:
+    image: kran/udacity-restapi-user
+    environment:
+      POSTGRESS_USERNAME: $POSTGRES_USERNAME
+      POSTGRESS_PASSWORD: $POSTGRES_PASSWORD 
+      POSTGRESS_DB: $POSTGRES_DATABASE 
+      POSTGRESS_HOST: $POSTGRES_HOST 
+      AWS_REGION: $AWS_REGION 
+      AWS_PROFILE: $AWS_PROFILE 
+      AWS_BUCKET: $AWS_S3_BUCKET
+      JWT_SECRET: $JWT_SECRET
+      URL: "http://localhost:8100"
+  backend-feed:
+    image: kran/udacity-restapi-feed
+    volumes:
+      - $HOME/.aws:/root/.aws
+    environment:
+      POSTGRESS_USERNAME: $POSTGRES_USERNAME
+      POSTGRESS_PASSWORD: $POSTGRES_PASSWORD 
+      POSTGRESS_DB: $POSTGRES_DATABASE 
+      POSTGRESS_HOST: $POSTGRES_HOST 
+      AWS_REGION: $AWS_REGION 
+      AWS_PROFILE: $AWS_PROFILE 
+      AWS_BUCKET: $AWS_S3_BUCKET
+      JWT_SECRET: $JWT_SECRET
+      URL: "http://localhost:8100"
+  frontend:
+    image: kran/udacity-frontend:local
+    ports:
+      - "8100:80"
