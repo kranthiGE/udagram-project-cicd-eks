@@ -18,4 +18,4 @@ before_install:
 
 
 install:
-  - echo 'hello kranthi'
+  - docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml build
