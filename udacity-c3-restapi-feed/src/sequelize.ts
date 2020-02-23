@@ -13,7 +13,7 @@ console.log( `host: ${c.host}` );
 // Instantiate new Sequelize instance!
 export const sequelize = new Sequelize({
   "username": c.username,
-  "password": "krandb123",
+  "password": c.password,
   "database": c.database,
   "host":     c.host,
 
