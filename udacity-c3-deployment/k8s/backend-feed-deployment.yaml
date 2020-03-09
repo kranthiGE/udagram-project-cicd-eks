@@ -12,7 +12,7 @@ spec:
         service: backend-feed
     spec:
       containers:
-      - image: kran/udacity-restapi-feed
+      - image: kranthikirana/udacity-restapi-feed
         name: backend-feed
         imagePullPolicy: Always  
         resources:
@@ -28,7 +28,7 @@ spec:
             configMapKeyRef:
               name: env-config
               key: URL
-        - name: AWS_BUCKET
+        - name: AWS_S3_BUCKET
           valueFrom:
             configMapKeyRef:
               name: env-config
@@ -48,22 +48,22 @@ spec:
             configMapKeyRef:
               name: env-config
               key: JWT_SECRET
-        - name: POSTGRESS_DB
+        - name: POSTGRES_DATABASE
           valueFrom:
             configMapKeyRef:
               name: env-config
               key: POSTGRESS_DB
-        - name: POSTGRESS_HOST
+        - name: POSTGRES_HOST
           valueFrom:
             configMapKeyRef:
               name: env-config
               key: POSTGRESS_HOST
-        - name: POSTGRESS_PASSWORD
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: env-secret
               key: POSTGRESS_PASSWORD
-        - name: POSTGRESS_USERNAME
+        - name: POSTGRES_USERNAME
           valueFrom:
             secretKeyRef:
               name: env-secret
