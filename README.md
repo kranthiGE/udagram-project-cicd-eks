@@ -11,6 +11,14 @@ A basic Ionic client web application which consumes the RestAPI Backend.
 2. [The RestAPI Feed Backend](/udacity-c3-restapi-feed), a Node-Express feed microservice.
 3. [The RestAPI User Backend](/udacity-c3-restapi-user), a Node-Express user microservice.
 
+## Deployment and running
+***********
+
+Docker Images have been built and deployed on EKS. Travis CI also has been setup to build the images.
+These images are pushed to public docker hub and from there the EKS PODs are built using deployment yaml files.
+ 
+Application URL: http://afa1354c2625c11eaa5760acdfde20c9-995700885.ap-south-1.elb.amazonaws.com:8100/home 
+
 ## Getting Setup
 
 > _tip_: this frontend is designed to work with the RestAPI backends). It is recommended you stand up the backend first, test using Postman, and then the frontend should integrate.
@@ -54,3 +62,62 @@ Ionic CLI can build the frontend into static HTML/CSS/JavaScript files. These fi
 ionic build
 ```
 ***
+### steps to create EKS cluster
+`
+eksctl create cluster \
+--name udagram-dev \
+--version 1.14 \
+--region ap-south-1 \
+--profile=eks
+`
+
+### commands to run to setup kubernetes
+`
+kubectl apply -f pod.yaml
+kubectl get pod
+kubectl get pod -o wide
+kubectl logs pod-example
+kubectl delete pods pod-example
+
+kubectl apply -f aws-secret.yaml 
+kubectl get secret aws-secret
+
+kubectl apply -f env-secret.yaml 
+kubectl get secret env-secret
+
+kubectl get secrets
+kubectl describe secrets/env-secret
+
+kubectl apply -f env-configmap.yaml 
+kubectl get configMap env-config
+
+
+kubectl apply -f backend-feed-deployment.yaml
+kubectl get deployment
+kubectl get pod
+kubectl logs backend-feed-XXXXXXXX-mdcmz
+kubectl describe pods
+
+kubectl delete deployment backend-feed
+kubectl get rs
+
+kubectl apply -f reverseproxy-service.yaml 
+kubectl apply -f backend-feed-service.yaml
+kubectl apply -f backend-user-service.yaml 
+kubectl get svc
+
+kubectl apply -f reverseproxy-deployment.yaml 
+
+kubectl scale deployment backend-feed --replicas=0
+kubectl scale deployment backend-feed --replicas=3
+`
+
+### command to ssh to POD container
+`
+kubectl exec -it backend-feed-XXXXXXXXXX -- /bin/bash
+`
+### create a IAM service account
+`
+eksctl utils associate-iam-oidc-provider --cluster dev --approve --profile=eks
+eksctl create iamserviceaccount --name eks-iam-svc --namespace default --cluster dev --attach-policy-arn arn:aws:iam::XXXXXXX:policy/s3-bucket-name --approve --override-existing-serviceaccounts --profile=XXXX
+`
