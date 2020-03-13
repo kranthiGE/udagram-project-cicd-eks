@@ -7,7 +7,7 @@ data:
   JWT_SECRET: kiransecret
   POSTGRESS_DB: udagramdev
   POSTGRESS_HOST: krandb.czaxjtxyxumo.ap-south-1.rds.amazonaws.com
-  URL: http://localhost:8100  
+  URL: http://afa1354c2625c11eaa5760acdfde20c9-995700885.ap-south-1.elb.amazonaws.com:8100  
 metadata:
   name: env-config
   

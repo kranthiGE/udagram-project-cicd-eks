@@ -13,7 +13,7 @@ spec:
         api: external        
     spec:
       containers:
-      - image: kranthikirana/udacity-frontend:local
+      - image: kranthikirana/udacity-frontend:latest
         name: frontend
         imagePullPolicy: Always          
         ports:
