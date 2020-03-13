@@ -17,7 +17,7 @@ A basic Ionic client web application which consumes the RestAPI Backend.
 Docker Images have been built and deployed on EKS. Travis CI also has been setup to build the images.
 These images are pushed to public docker hub and from there the EKS PODs are built using deployment yaml files.
  
-Application URL: http://afa1354c2625c11eaa5760acdfde20c9-995700885.ap-south-1.elb.amazonaws.com:8100/home 
+Application URL: http://afa1354c2625c11eaa5760acdfde20c9-995700885.ap-south-1.elb.amazonaws.com:8100 
 
 Travic CI successful build: https://travis-ci.com/kranthiGE/udagram-project-cicd-eks 
 ![Screen shot of the application](travis-ci-screen-shot.png)
